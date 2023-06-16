@@ -1,0 +1,8 @@
+{
+  "profiles": [
+    { "name": "Profile 1", "avatar": "assets/images/avatar-1.png" },
+    { "name": "Profile 2", "avatar": "assets/images/avatar-2.png" },
+    { "name": "Profile 3", "avatar": "assets/images/avatar-3.png" },
+    { "name": "Profile 4", "avatar": "assets/images/avatar-4.png" }
+  ]
+}
