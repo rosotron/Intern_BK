@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Intern_BK/static/css/main.ddd5a8fd.css",
+    "main.js": "/Intern_BK/static/js/main.40ede59b.js",
+    "static/media/bg1.jpg": "/Intern_BK/static/media/bg1.9189595fb2ca2052b045.jpg",
+    "index.html": "/Intern_BK/index.html",
+    "main.ddd5a8fd.css.map": "/Intern_BK/static/css/main.ddd5a8fd.css.map",
+    "main.40ede59b.js.map": "/Intern_BK/static/js/main.40ede59b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ddd5a8fd.css",
+    "static/js/main.40ede59b.js"
+  ]
+}
