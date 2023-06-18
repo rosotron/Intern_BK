@@ -1,0 +1,92 @@
+.profiles-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.ex-logo {
+  position: absolute;
+  width: 130px;
+  top: 25px;
+  left: 40px;
+}
+.br-logo {
+  position: absolute;
+  width: 130px;
+  top: 25px;
+  left: 170px;
+}
+
+.whowatch {
+  color: white;
+  font-size: 50px;
+  user-select: none;
+}
+
+.profiles-main {
+  display: flex;
+  margin: 30px;
+  margin-bottom: 80px;
+}
+.profiles-content {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+
+  cursor: pointer;
+}
+
+.profiles-content:hover .avatars {
+  border: 5px solid white;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.profiles-content:hover .name {
+  color: white;
+}
+
+.avatars {
+  width: 120px;
+  border-radius: 5px;
+}
+.name {
+  text-align: center;
+  color: grey;
+}
+
+.manage-profile {
+  width: 50vh;
+  padding: 20px;
+  color: grey;
+  font-size: 25px;
+  border: 3px solid grey;
+  background-color: inherit;
+  letter-spacing: 4px;
+}
+
+.manage-profile:hover {
+  cursor: pointer;
+  color: white;
+  border: 3px solid white;
+}
+
+.profiles-content {
+  position: relative;
+}
+
+.edit-icon {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(135deg);
+  font-size: 60px;
+  color: white;
+}
+
+.edit-icon.profiles-content {
+  opacity: 0.6;
+}
