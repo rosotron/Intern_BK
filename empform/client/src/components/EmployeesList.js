@@ -16,14 +16,14 @@ const Employee = (props) => (
         Edit
       </Link>{" "}
       |{" "}
-      <a
+      <button
         onClick={() => {
           props.deleteEmployee(props.employee._id);
         }}
         className="delete-link"
       >
         Delete
-      </a>
+      </button>
     </td>
   </tr>
 );
