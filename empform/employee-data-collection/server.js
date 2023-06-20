@@ -47,12 +47,19 @@ const employeeSchema = new Schema({
 
 const Employee = mongoose.model("Employee", employeeSchema);
 
-// Get all employees
 app.get("/employees", (req, res) => {
   Employee.find()
     .then((employees) => res.json(employees))
     .catch((err) => res.status(400).json("Error: " + err));
 });
+
+app.get("/employees/:id", (req, res) => {
+  const employeeId = req.params.id;
+  Employee.findById(employeeId)
+    .then((employee) => res.json(employee))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 
 app.post("/employees/add", (req, res) => {
   const newEmployee = new Employee(req.body);

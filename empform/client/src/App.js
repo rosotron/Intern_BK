@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import EmployeesList from "./components/EmployeesList";
@@ -31,9 +31,11 @@ class App extends Component {
             </div>
           </nav>
           <br />
+          <Routes>
           <Route path="/" exact component={EmployeesList} />
-          <Route path="/edit" element={EditEmployee} />
+          <Route path="/edit/:id" component={EditEmployee} />
           <Route path="/create" component={CreateEmployee} />
+          </Routes>
         </div>
       </Router>
     );

@@ -12,9 +12,9 @@ const Employee = (props) => (
     <td>{props.employee.contactInfo.email}</td>
     <td>{props.employee.contactInfo.mobileNo}</td>
     <td>
-      <Link to={"/edit/" + props.employee._id} className="edit-link">
-        Edit
-      </Link>{" "}
+    <Link to={`/edit/${props.employee._id}`} className="edit-link">
+      Edit
+    </Link>{" "}
       |{" "}
       <button
         onClick={() => {

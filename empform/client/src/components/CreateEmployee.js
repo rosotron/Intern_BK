@@ -103,22 +103,60 @@ export default class CreateEmployee extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-  
-    const { qualifications } = this.state;
-  
+
+    const { name,address,contactInfo,qualifications } = this.state;
+
+    if(!name.firstName)
+    {
+      alert("Please give your first name.");
+      return;
+    }
+
+    if(!name.lastName)
+    {
+      alert("Please give your first name.");
+      return;
+    }
+
+    if(!address)
+    {
+      alert("Please give your address.");
+      return;
+    }
+
+    if(!contactInfo.mobileNo)
+    {
+      alert("Please give your mobile number.");
+      return;
+    }
+    else if(contactInfo.mobileNo.length !== 10 || !/^[0-9]+$/.test(contactInfo.mobileNo)) {
+      alert("Please give 10 digit mobile number");
+      return;
+    }
+
+    if(!contactInfo.email)
+    {
+      alert("Please give your email.");
+      return;
+    }
+    else if(!/\S+@\S+\.\S+/.test(contactInfo.email)) {
+      alert("Please give correct email.");
+      return;
+    }
+
     if (qualifications.length === 0) {
       alert("Please add at least one qualification.");
       return;
     }
-  
+
     for (let i = 0; i < qualifications.length; i++) {
       const qualification = qualifications[i];
-  
+
       if (parseFloat(qualification.cgpa) > parseFloat(qualification.outOfCgpa)) {
         alert("CGPA cannot be larger than Out of CGPA.");
         return;
       }
-  
+
       if (qualification.startDate > qualification.endDate) {
         alert("Starting date cannot be after the end date.");
         return;

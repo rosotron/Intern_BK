@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-//import "./EditEmployee.css";
+import "./EditEmployee.css";
 
 export default class EditEmployee extends Component {
   constructor(props) {
@@ -33,9 +33,8 @@ export default class EditEmployee extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-
-    axios.get(`http://localhost:5000/employees/${id}`)
+    const employeeId = this.props.match.params.id; 
+    axios.get(`http://localhost:5000/employees/${employeeId}`)
       .then((res) => {
         const employee = res.data;
         this.setState({
@@ -122,7 +121,64 @@ export default class EditEmployee extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const { id } = this.props.match.params;
+    const { name,address,contactInfo,qualifications } = this.state;
+
+    if(!name.firstName)
+    {
+      alert("Please give your first name.");
+      return;
+    }
+
+    if(!name.lastName)
+    {
+      alert("Please give your first name.");
+      return;
+    }
+
+    if(!address)
+    {
+      alert("Please give your address.");
+      return;
+    }
+
+    if(!contactInfo.mobileNo)
+    {
+      alert("Please give your mobile number.");
+      return;
+    }
+    else if(contactInfo.mobileNo.length !== 10 || !/^[0-9]+$/.test(contactInfo.mobileNo)) {
+      alert("Please give 10 digit mobile number");
+      return;
+    }
+
+    if(!contactInfo.email)
+    {
+      alert("Please give your email.");
+      return;
+    }
+    else if(!/\S+@\S+\.\S+/.test(contactInfo.email)) {
+      alert("Please give a correct email");
+      return;
+    }
+
+    if (qualifications.length === 0) {
+      alert("Please add at least one qualification.");
+      return;
+    }
+
+    for (let i = 0; i < qualifications.length; i++) {
+      const qualification = qualifications[i];
+
+      if (parseFloat(qualification.cgpa) > parseFloat(qualification.outOfCgpa)) {
+        alert("CGPA cannot be larger than Out of CGPA.");
+        return;
+      }
+
+      if (qualification.startDate > qualification.endDate) {
+        alert("Starting date cannot be after the end date.");
+        return;
+      }
+    }
 
     const employee = {
       name: this.state.name,
@@ -133,11 +189,17 @@ export default class EditEmployee extends Component {
 
     console.log(employee);
 
-    axios.put(`http://localhost:5000/employees/update/${id}`, employee)
-      .then((res) => console.log(res.data));
-
-    window.location = "/";
+    const employeeId = this.props.match.params.id;
+    axios.put(`http://localhost:5000/employees/update/${employeeId}`, employee)
+      .then((res) => {
+        console.log(res.data);
+        window.location = "/"; 
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
+  
 
   render() {
     return (
