@@ -3,8 +3,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import "./EditEmployee.css";
+import withRouter from "./withRouter";
 
-export default class EditEmployee extends Component {
+
+class EditEmployee extends Component {
   constructor(props) {
     super(props);
 
@@ -33,10 +35,12 @@ export default class EditEmployee extends Component {
   }
 
   componentDidMount() {
-    const employeeId = this.props.match.params.id; 
+    const employeeId = this.props.params.id; 
+    console.log(employeeId);
     axios.get(`http://localhost:5000/employees/${employeeId}`)
       .then((res) => {
         const employee = res.data;
+        console.log(employee);
         this.setState({
           name: employee.name,
           address: employee.address,
@@ -89,10 +93,11 @@ export default class EditEmployee extends Component {
     const { name, value } = e.target;
     this.setState((prevState) => {
       const qualifications = [...prevState.qualifications];
-      qualifications[index][name] = value;
+      qualifications[index][name] = value===""?null:value;
       return { qualifications };
     });
   }
+  
 
   addQualification() {
     this.setState((prevState) => ({
@@ -157,7 +162,7 @@ export default class EditEmployee extends Component {
       return;
     }
     else if(!/\S+@\S+\.\S+/.test(contactInfo.email)) {
-      alert("Please give a correct email");
+      alert("Please give");
       return;
     }
 
@@ -189,7 +194,7 @@ export default class EditEmployee extends Component {
 
     console.log(employee);
 
-    const employeeId = this.props.match.params.id;
+    const employeeId = this.props.params.id;
     axios.put(`http://localhost:5000/employees/update/${employeeId}`, employee)
       .then((res) => {
         console.log(res.data);
@@ -312,7 +317,7 @@ export default class EditEmployee extends Component {
                   onChange={(e) => this.onChangeQualifications(e, index)}
                 />
                 <label>Starting Date:</label>
-                <DatePicker
+                {/* <DatePicker
                   selected={qualification.startDate}
                   onChange={(date) =>
                     this.onChangeQualifications(
@@ -326,8 +331,8 @@ export default class EditEmployee extends Component {
                     )
                   }
                   className="form-control"
-                />
-                <label>End Date:</label>
+                /> */}
+                {/* <label>End Date:</label>
                 <DatePicker
                   selected={qualification.endDate}
                   onChange={(date) =>
@@ -342,7 +347,7 @@ export default class EditEmployee extends Component {
                     )
                   }
                   className="form-control"
-                />
+                /> */}
                 <button
                   type="button"
                   className="remove-qualification"
@@ -372,3 +377,5 @@ export default class EditEmployee extends Component {
     );
   }  
 }
+
+export default withRouter(EditEmployee);
