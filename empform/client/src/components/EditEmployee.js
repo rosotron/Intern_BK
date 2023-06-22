@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import DatePicker from "react-datepicker";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import "./EditEmployee.css";
@@ -35,12 +35,10 @@ class EditEmployee extends Component {
   }
 
   componentDidMount() {
-    const employeeId = this.props.params.id; 
-    console.log(employeeId);
+    const employeeId = this.props.params.id;
     axios.get(`http://localhost:5000/employees/${employeeId}`)
       .then((res) => {
         const employee = res.data;
-        console.log(employee);
         this.setState({
           name: employee.name,
           address: employee.address,
@@ -93,11 +91,11 @@ class EditEmployee extends Component {
     const { name, value } = e.target;
     this.setState((prevState) => {
       const qualifications = [...prevState.qualifications];
-      qualifications[index][name] = value===""?null:value;
+      qualifications[index][name] = value === "" ? null : value;
       return { qualifications };
     });
   }
-  
+
 
   addQualification() {
     this.setState((prevState) => ({
@@ -126,42 +124,37 @@ class EditEmployee extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const { name,address,contactInfo,qualifications } = this.state;
+    const { name, address, contactInfo, qualifications } = this.state;
 
-    if(!name.firstName)
-    {
+    if (!name.firstName) {
       alert("Please give your first name.");
       return;
     }
 
-    if(!name.lastName)
-    {
+    if (!name.lastName) {
       alert("Please give your first name.");
       return;
     }
 
-    if(!address)
-    {
+    if (!address) {
       alert("Please give your address.");
       return;
     }
 
-    if(!contactInfo.mobileNo)
-    {
+    if (!contactInfo.mobileNo) {
       alert("Please give your mobile number.");
       return;
     }
-    else if(contactInfo.mobileNo.length !== 10 || !/^[0-9]+$/.test(contactInfo.mobileNo)) {
+    else if (contactInfo.mobileNo.length !== 10 || !/^[0-9]+$/.test(contactInfo.mobileNo)) {
       alert("Please give 10 digit mobile number");
       return;
     }
 
-    if(!contactInfo.email)
-    {
+    if (!contactInfo.email) {
       alert("Please give your email.");
       return;
     }
-    else if(!/\S+@\S+\.\S+/.test(contactInfo.email)) {
+    else if (!/\S+@\S+\.\S+/.test(contactInfo.email)) {
       alert("Please give");
       return;
     }
@@ -198,13 +191,13 @@ class EditEmployee extends Component {
     axios.put(`http://localhost:5000/employees/update/${employeeId}`, employee)
       .then((res) => {
         console.log(res.data);
-        window.location = "/"; 
+        window.location = "/";
       })
       .catch((error) => {
         console.log(error);
       });
   }
-  
+
 
   render() {
     return (
@@ -317,8 +310,8 @@ class EditEmployee extends Component {
                   onChange={(e) => this.onChangeQualifications(e, index)}
                 />
                 <label>Starting Date:</label>
-                {/* <DatePicker
-                  selected={qualification.startDate}
+                <DatePicker
+                  selected={new Date(qualification.startDate)}
                   onChange={(date) =>
                     this.onChangeQualifications(
                       {
@@ -331,10 +324,11 @@ class EditEmployee extends Component {
                     )
                   }
                   className="form-control"
-                /> */}
-                {/* <label>End Date:</label>
+                />
+
+                <label>End Date:</label>
                 <DatePicker
-                  selected={qualification.endDate}
+                  selected={new Date(qualification.endDate)}
                   onChange={(date) =>
                     this.onChangeQualifications(
                       {
@@ -347,7 +341,7 @@ class EditEmployee extends Component {
                     )
                   }
                   className="form-control"
-                /> */}
+                />
                 <button
                   type="button"
                   className="remove-qualification"
@@ -375,7 +369,7 @@ class EditEmployee extends Component {
         </form>
       </div>
     );
-  }  
+  }
 }
 
 export default withRouter(EditEmployee);
