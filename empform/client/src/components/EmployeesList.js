@@ -40,7 +40,7 @@ export default class EmployeesList extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/employees/")
+      .get("https://empform.onrender.com/employees/")
       .then((response) => {
         this.setState({ employees: response.data });
       })
@@ -51,7 +51,7 @@ export default class EmployeesList extends Component {
 
   deleteEmployee(id) {
     axios
-      .delete("http://localhost:5000/employees/delete/" + id)
+      .delete("https://empform.onrender.com/employees/delete/" + id)
       .then((response) => {
         console.log(response.data);
         this.setState({

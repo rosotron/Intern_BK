@@ -36,7 +36,7 @@ class EditEmployee extends Component {
 
   componentDidMount() {
     const employeeId = this.props.params.id;
-    axios.get(`http://localhost:5000/employees/${employeeId}`)
+    axios.get(`https://empform.onrender.com/employees/${employeeId}`)
       .then((res) => {
         const employee = res.data;
         this.setState({
@@ -188,7 +188,7 @@ class EditEmployee extends Component {
     console.log(employee);
 
     const employeeId = this.props.params.id;
-    axios.put(`http://localhost:5000/employees/update/${employeeId}`, employee)
+    axios.put(`https://empform.onrender.com/employees/update/${employeeId}`, employee)
       .then((res) => {
         console.log(res.data);
         window.location = "/";

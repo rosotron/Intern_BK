@@ -172,7 +172,7 @@ export default class CreateEmployee extends Component {
   
     console.log(employee);
   
-    axios.post("http://localhost:5000/employees/add", employee)
+    axios.post("https://empform.onrender.com/employees/add", employee)
       .then((res) => console.log(res.data));
   
     window.location = "/";
